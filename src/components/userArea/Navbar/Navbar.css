@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   background: linear-gradient(#ac7b33, #f7b148);
+  z-index: 999;
 }
 
 .navbar {
@@ -12,19 +13,25 @@
   align-items: center;
   width: 100%;
   height: 4em;
+  border-bottom: 1px solid rgb(255, 136, 0);
 }
 
 .navbar ul {
-
   list-style-type: none;
 }
 
 .navbar li {
+  text-decoration: none;
   font-family: 'Arimo';
   font-size: 20px;
   color: white;
   display: inline;
-  padding-right: 1rem;
+  padding: 1.1em;
+}
+
+.navbar li:hover {
+  opacity: 0.5;
+  background-color: #ccc;
 }
 
 .burger-menu-icon {
@@ -32,4 +39,13 @@
   cursor: pointer;
   font-size: 30px;
   margin-right: 0.75rem;
+}
+
+.navlink {
+  text-decoration: none;
+}
+
+.navlink a {
+  color: white;
+  cursor: pointer;
 }

@@ -1,0 +1,6 @@
+.sidebar-open {
+  float: right;
+  position: absolute;
+  left: 97%;
+  top: 2%;
+}

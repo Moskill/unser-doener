@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&family=Poppins:wght@300&family=Roboto:wght@100&display=swap');
+
+* {
+  font-family: 'Poppins';
+}
+
+.sidebar-wrapper {
+  width: 20%;
+  background-color: rgb(241, 241, 241);
+  position: fixed;
+  left: 80%;
+  top: 4.05em;
+  height: 100%;
+  box-shadow: -7px 2px 17px -5px #000;
+  transition: all 0.2s ease-in-out;
+}
+
+.close-icon {
+  font-size: 30px;
+  color: rgb(83, 83, 83);
+  position: absolute;
+  left: 2%;
+  top: 0.7%;
+}
+
+.sidebar-header {
+  height: 2.5em;
+  width: 100%;
+  background-image: linear-gradient(to left, rgb(255, 201, 140), rgb(236, 255, 193));
+  display: block;
+  border-bottom: 1px solid rgb(71, 50, 26);
+}
+
+.burger-menu-icon {
+  display: inline;
+  cursor: pointer;
+  font-size: 30px;
+  margin-right: 0.75rem;
+}

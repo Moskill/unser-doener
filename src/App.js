@@ -1,10 +1,11 @@
 import './App.css';
-import Navbar from './components/Navbar/Navbar';
+import { Route, Switch } from 'react-router-dom';
+import UserAreaIndex from './components/userArea';
 
 function App() {
   return (
     <>
-      <Navbar />
+      <UserAreaIndex />
     </>
   );
 }
