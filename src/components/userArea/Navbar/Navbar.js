@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Navbar.css';
-import Sidebar from '../Sidebar/Sidebar';
-import { GiHamburgerMenu } from "react-icons/gi";
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 
 function Navbar() {

@@ -6,28 +6,29 @@ import CartItem from './CartItem';
 
 function Sidebar(props) {
 
-  
   const [cookies, setCookie, removeCookie] = useCookies(['cookie-name']);
   const [sidebarOpen, setSidebarOpen] = useState(props.sidebarOpen);
 
   const sidebarOpenHandler = () => { // FUNZT NICHT DER SCHEISS!!!!!
-    setSidebarOpen({left: '100%'})
+    setSidebarOpen({left: '110%'})
     console.log(sidebarOpen)
   }
-
+console.log(cookies.cart)
 
   return (
     <>
-    {cookies.cart && (
+    {cookies.cart && 
+    (
       <div className="sidebar-wrapper" style={props.sidebarOpen} >
         <div className="sidebar-header">
           <span className="sidebar-header-title">Ihr Warenkorb</span>
-          {/* <AiOutlineCloseCircle className="close-icon" onClick={sidebarOpenHandler}/> */}
+          {/* <AiOutlineCloseCircle className="close-icon" onClick={sidebarCloseHandler}/> */}
         </div>
         <div className="cart-wrapper">
-          <CartItem />
+          {cookies.cart.map((meal) => <CartItem data={meal} />)}
+          
         </div>
-        <span>{cookies.cart.meal1[0]}</span>
+        <span>asgfsadjgfska</span>
       </div>
       )}
     </>

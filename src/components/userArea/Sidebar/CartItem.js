@@ -2,23 +2,31 @@ import React from 'react';
 import './CartItem.css';
 import { useCookies } from 'react-cookie';
 
-function CartItem() {
+function CartItem({data}) {
   const [cookies, setCookie, removeCookie] = useCookies();
 
   console.log(cookies.cart)
 
+  // const removeItemFromCookie = (e) => {
+  //   e.preventDefault();
+  //   console.log(cookies.cart)
+  //   const newCookie = cookies.cart.splice(0,1)
+  //   setCookie('cart', [{...cookies.cart}])
+  // }
+
+
+
   return (
     <>
-    {cookies.cart && (
-    <form action="?" method="post">
+    {cookies.cart && 
+    (  
+    <form>
       <div className="cart-item-wrapper">
+          <button className="cart-item-delete-btn">x</button>
         <div className="cart-item-card">
-          {/* {cookies.cart.map((key) => {
-            console.log(key)
-          })} */}
           <img src="http://skeel.de/img/doener2-opt.jpg" />
           <div className="card-info">
-            <span className="card-item-title">{cookies.cart.meal1.name}</span>
+            <span className="card-item-title">{data.name}</span>
             <p className="cart-item-desc"><br/>Der Klassiker mit Kalb- oder Hähnchenfleisch, frischem Salat und verschiedenen Saucen. </p>
           </div>
         </div>
@@ -39,7 +47,7 @@ function CartItem() {
             </div>
           </div>
             <button className="order-btn" type="submit">Jetzt bestellen!</button>
-        </form>
+    </form>
       )}
     </>
   )
