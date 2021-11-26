@@ -3,9 +3,9 @@ import './CartItem.css';
 import { useCookies } from 'react-cookie';
 
 function CartItem({data}) {
-  const [cookies, setCookie, removeCookie] = useCookies();
+  const [cookies, setCookie, removeCookie] = useCookies(['rawCart']);
 
-  console.log(cookies.cart)
+  console.log(cookies.rawCart)
 
   // const removeItemFromCookie = (e) => {
   //   e.preventDefault();
@@ -18,9 +18,9 @@ function CartItem({data}) {
 
   return (
     <>
-    {cookies.cart && 
+    {cookies.rawCart && 
     (  
-    <form>
+    
       <div className="cart-item-wrapper">
           <button className="cart-item-delete-btn">x</button>
         <div className="cart-item-card">
@@ -46,8 +46,8 @@ function CartItem({data}) {
               <input type="checkbox" value="Weisskraut" /><span>Cocktail-Sauce</span><br/>
             </div>
           </div>
-            <button className="order-btn" type="submit">Jetzt bestellen!</button>
-    </form>
+            
+    
       )}
     </>
   )
