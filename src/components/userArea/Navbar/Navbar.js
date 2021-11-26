@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Navbar.css';
 import { NavLink } from 'react-router-dom';
+import Login from '../Login/Login';
+import LogMenu from './LogMenu';
 
 
 function Navbar() {
+
+  const [showGoogleMenu, setShowGoogleMenu] = useState(false);
 
 
   return (
@@ -17,8 +21,11 @@ function Navbar() {
             <NavLink className="navlink" to="/order"><li>About Us</li></NavLink>
           </ul>
         </nav>
+        <div className="google-login" onClick={() => setShowGoogleMenu(true)}>
+          <Login/>
+        </div>
       </div>
-
+      {showGoogleMenu && <LogMenu />}
     </>
   )
 }
