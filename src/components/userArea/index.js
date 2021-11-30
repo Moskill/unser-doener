@@ -4,6 +4,8 @@ import Sidebar from './Sidebar/Sidebar';
 import Menu from './Menu/Menu';
 import { useCookies } from 'react-cookie';
 import { GiHamburgerMenu } from "react-icons/gi";
+import { Switch, Route} from 'react-router-dom';
+import AdminArea from '../adminArea';
 
 
 import './index.css';
@@ -23,41 +25,6 @@ function UserAreaIndex() {
     sidebarOpen.left === 80 + '%' ? setSidebarOpen({left: 110 + '%'}) : setSidebarOpen({left: 80 + '%'})
   }
 
-  // Ein Testobjekt um den Cookie zu befüllen
-  const food = [ 
-                {
-                  name: 'Döner Kebap',
-                  meat: 'kalb',
-                  sauce: ['Tsatsiki', 'Cocktail'],
-                  salad: ['Rotkraut', 'Weisskraut', 'Zwiebeln', 'Bauernsalat'],
-                  note: ['scharf', 'keine Tomaten']
-                },
-                {
-                  name: 'Dürum Döner',
-                  meat: 'chicken',
-                  sauce: ['Tsatsiki', 'Curry'],
-                  salad: ['Weisskraut', 'Bauernsalat'],
-                  note: ['kein Rotkraut', 'keine Tomaten']
-                },
-                {
-                  name: 'Pom Döner',
-                  meat: 'chicken',
-                  sauce: ['Tsatsiki', 'Curry'],
-                  salad: ['Weisskraut', 'Bauernsalat'],
-                  note: ['kein Weisskraut', 'scharf']
-                }
-               ]
-  
-
-  // Testfunktion um einen Cookie zu setzen
-  const cookieHandler = () => {
-    setSidebarOpen({left: 80 + '%'});
-    setCookie('cart', food, {path: '/'});
-    //console.log(cookies.cart && cookies.cart.meal1[0]); // So bekommt man Zugriff auf das Array
-
-    // for(const i in cookies) // Mit for in geht es auch
-    //   console.log(cookies[i])
-  }
 
   // Der Handler um den Cookie upzudaten
   const addToCookie = () => {
@@ -66,15 +33,31 @@ function UserAreaIndex() {
 
   return (
     <>
-      <Navbar />
-      <div className="sidebar-open">
-          <GiHamburgerMenu className="burger-menu-icon" onClick={sidebarOpenHandler}/>
-      </div>
-      <Sidebar sidebarOpen={sidebarOpen} />
-      <Menu />
-      <button onClick={cookieHandler}>Set Cookie</button>
+      <Switch>
+        <Route exact path="/">
+          <Navbar />
+          <div className="sidebar-open">
+              <GiHamburgerMenu className="burger-menu-icon" onClick={sidebarOpenHandler}/>
+          </div>
+          <Sidebar sidebarOpen={sidebarOpen} />
+        </Route>
+        <Route exact path="/menu" component={Menu}>
+        <Navbar />
+          <div className="sidebar-open">
+              <GiHamburgerMenu className="burger-menu-icon" onClick={sidebarOpenHandler}/>
+          </div>
+          <Sidebar sidebarOpen={sidebarOpen} />
+          <Menu/>
+        </Route>
+
+        <Route exact path="/AdminArea" component={AdminArea}>
+          <AdminArea/>
+        </Route>
+      </Switch>
+
+      {/* <button onClick={cookieHandler}>Set Cookie</button>
       <button onClick={() => {removeCookie('cart', {path: '/'}); console.log('FOTZE')} }>Cookie löschen</button>
-      <button onClick={addToCookie}>Add Meal to Cookie</button>
+      <button onClick={addToCookie}>Add Meal to Cookie</button> */}
     </>
   )
 }
