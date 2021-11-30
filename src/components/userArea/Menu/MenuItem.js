@@ -6,25 +6,29 @@ import doener2 from '../../../img/doener2.jpg';
 
 function MenuItem({data}) {
   
-  const [cookies, setCookie, removeCookie] = useCookies(['cart']);
-  const [actualMeal, setActualMeal] = useState([]);
+  const [cookies, setCookie, removeCookie] = useCookies(['rawCart']);
+  // const [actualMeal, setActualMeal] = useState([]);
   
   const addMenu = (menu) => {
-    console.log(menu)
-    setActualMeal([...actualMeal, menu])
-    setCookie('rawCart', {...cookies.rawCart, actualMeal})
+    let actualCart = [];
+    actualCart += cookies.rawCart.menu;
+    console.log(actualCart)
+    // setActualMeal([...actualMeal, menu])
+    // setCookie('rawCart', {menu, ...cookies.rawCart.menu})
   }
 
-  useEffect(() => {
-    setCookie('rawCart', {actualMeal})
-  }, [actualMeal])
+  console.log('Im Cookie steht jetzt: ', cookies)
+
+  // useEffect(() => {
+  //   setCookie('rawCart', {actualMeal})
+  // }, [actualMeal])
   
 
   return (
     <>
     {data && data.map(menu => (
       
-      <div className="menu-item__container" onClick={() => addMenu(menu)}>
+      <div className="menu-item__container" onClick={() => addMenu(menu.id)}>
         <div className="menu-item__wrapper">
           <div className="menu-item__title">{menu.name}</div>
           <img src={doener2} className="menu-item__image"></img>
