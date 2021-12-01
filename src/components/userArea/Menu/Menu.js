@@ -13,9 +13,11 @@ function Menu() {
       .then((data) => setMenuData(data));
   }, []);
 
+  console.log(menuData)
+
   return (
     <>
-      <MenuItem data={menuData}/>
+      <MenuItem data={menuData} key={menuData.id} />
     </>
   )
 }

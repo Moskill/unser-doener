@@ -7,10 +7,7 @@ function SideDishesList(props) {
       <Datagrid>
         <TextField source="id" />
         <TextField source="name" />
-        <TextField source="price" />
         <TextField source="additives" />
-        <TextField source="menu_id" />
-        <TextField source="order_id" />
         <EditButton basePath="/sideDishes" />
         <DeleteButton basePath="/sideDishes" />
       </Datagrid>

@@ -2,25 +2,19 @@ import React from 'react';
 import './CartItem.css';
 import { useCookies } from 'react-cookie';
 
-function CartItem({data, mealId}) {
+function CartItem({data, index}) {
   const [cookies, setCookie, removeCookie] = useCookies(['rawCart']);
 
-  const removeItemFromCookie = (e) => {
+  const removeItemFromCart = (e) => {
     e.preventDefault();
-    const actualMeal = cookies.rawCart.actualMeal;
-    console.log(actualMeal, 'Vor dem Splice')
-    actualMeal.splice(mealId, 1);
-    console.log(actualMeal, 'Nach dem Splice')
-    console.log(cookies)
-    removeCookie('rawCart')
-    setCookie('rawCart', {...cookies.rawCart.actualMeal, actualMeal})
+
   }
 
   return (
     <>
       {cookies.rawCart && (  
         <div className="cart-item-wrapper">
-          <button className="cart-item-delete-btn" onClick={removeItemFromCookie}>x</button>
+          <button className="cart-item-delete-btn" onClick={removeItemFromCart}>x</button>
         <div className="cart-item-card">
           <img src="http://skeel.de/img/doener2-opt.jpg" />
           <div className="card-info">

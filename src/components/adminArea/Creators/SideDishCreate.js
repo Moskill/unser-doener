@@ -1,16 +1,13 @@
 import React from 'react';
-import { Create, SimpleForm, TextInput, ImageInput, ImageField } from 'react-admin';
+import { Create, SimpleForm, TextInput } from 'react-admin';
 
 function MenuCreate(props) {
   return (
-    <Create title="Create an menu" {...props}>
+    <Create title="Create an side dish" {...props}>
       <SimpleForm>
         <TextInput source='name' />
         <TextInput multiline source='description' />
         <TextInput source='price' />
-        <ImageInput source='menu' accept='image/*' name="imageUpload">
-          <ImageField source='upload' />
-        </ImageInput>
       </SimpleForm>
     </Create>
   )

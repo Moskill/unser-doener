@@ -1,18 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import './Sidebar.css';
-import { useCookies } from 'react-cookie';
 import CartItem from './CartItem';
 
 function Sidebar(props) {
 
-  const [cookies, setCookie, removeCookie] = useCookies(['rawCart']);
   const [sidebarOpen, setSidebarOpen] = useState(props.sidebarOpen);
+  const [menuList, setMenuList] = useState();
+  const [cartList, setCartList] = useState();
+  const [sideDishes, setSideDishes] = useState();
+
+  let myCart = JSON.parse(localStorage.getItem('myCart'));
+  let useEffectCouter = myCart.length;
 
   useEffect(() => {
     fetch("http://localhost:8080/sideDishes")
     .then((response) => response.json())
-    .then((data) => console.log(data));
-  }, [])
+    .then((data) => setSideDishes(data));
+  }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/menu")
+    .then((response) => response.json())
+    .then((data) => setMenuList(data));
+  }, []);
+
+  
+  useEffect(() => {
+    let selectedMenus = [];
+    myCart && myCart.myCart.forEach((c) => {
+      const foundMenu = menuList && menuList.find((m) => m.id === c);
+      foundMenu && selectedMenus.push(foundMenu);
+    });
+    setCartList(selectedMenus);
+  }, [useEffectCouter])
+
 
   const sidebarCloseHandler = () => { // FUNZT NICHT DER SCHEISS!!!!!
     setSidebarOpen({left: '110%'})
@@ -27,7 +48,7 @@ function Sidebar(props) {
         </div>
         <div className="cart-wrapper">
           <form>
-            {/* {cookies.rawCart && cookies.rawCart.map((meal, index) => <CartItem data={meal} mealId={index}/>)} */}
+            {myCart.myCart && myCart.myCart.forEach((meal, index) =>  <CartItem data={meal} index={index}/>)}
             <button className="order-btn" type="submit">Jetzt bestellen!</button>
           </form>
         </div>
@@ -36,5 +57,4 @@ function Sidebar(props) {
   )
 }
 
-export default Sidebar
-
+export default Sidebar;

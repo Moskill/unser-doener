@@ -1,28 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
 import './Menu.css';
 import doener2 from '../../../img/doener2.jpg';
 
 function MenuItem({data}) {
   
-  const [cookies, setCookie, removeCookie] = useCookies(['rawCart']);
-  // const [actualMeal, setActualMeal] = useState([]);
-  
-  const addMenu = (menu) => {
-    let actualCart = [];
-    actualCart += cookies.rawCart.menu;
-    console.log(actualCart)
-    // setActualMeal([...actualMeal, menu])
-    // setCookie('rawCart', {menu, ...cookies.rawCart.menu})
+  if(!localStorage.getItem('myCart')){
+    console.log('Geht er rein@myCart')
+    localStorage.setItem('myCart', JSON.stringify({myCart:[]}));
   }
 
-  console.log('Im Cookie steht jetzt: ', cookies)
-
-  // useEffect(() => {
-  //   setCookie('rawCart', {actualMeal})
-  // }, [actualMeal])
-  
+  const addMenu = (menu) => {
+    let tmpCart = [];
+    tmpCart = JSON.parse( localStorage.getItem('myCart'));
+    tmpCart.myCart.push(menu)
+    localStorage.setItem('myCart', JSON.stringify(tmpCart))
+  }
 
   return (
     <>
