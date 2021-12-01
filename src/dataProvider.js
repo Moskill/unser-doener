@@ -6,7 +6,6 @@ const httpClient = fetchUtils.fetchJson;
 
 const dataProvider = {
     getList: (resource, params) => {
-        console.log(resource, 'Hier steht was in Resource drin ist!')
         const { page, perPage } = params.pagination;
         const { field, order } = params.sort;
         const query = {
@@ -15,7 +14,6 @@ const dataProvider = {
             filter: JSON.stringify(params.filter),
         };
         const url = `${apiUrl}/${resource}`;
-        console.log(params)
         return httpClient(url).then(({ headers, json }) => ({
             data: json,
             total: parseInt(headers.get('content-range')),
@@ -76,7 +74,7 @@ const dataProvider = {
             body: JSON.stringify(params.data),
         }).then(({ json }) => ({
             data: { ...params.data, id: json.id },
-        })),
+        })), // Hier muss es dann irgendwie weiter genen mit dem  Request
 
     delete: (resource, params) =>
         httpClient(`${apiUrl}/${resource}/${params.id}`, {

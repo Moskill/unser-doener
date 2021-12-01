@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import { 
   List, 
   Datagrid, 
   TextField, 
-  Datefiled, 
+  ImageField, 
   EditButton, 
   DeleteButton
 } from 'react-admin';  
@@ -19,6 +19,7 @@ function MenuList(props) {
         <TextField source='name' ></TextField>
         <TextField source='description' ></TextField>
         <TextField source='price' ></TextField>
+        <TextField source='imgUrl'></TextField>
         <EditButton basePath="/menu" />
         <DeleteButton basePath="/menu" />
       </Datagrid>
