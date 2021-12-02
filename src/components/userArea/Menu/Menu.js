@@ -13,7 +13,7 @@ function Menu() {
       .then((data) => setMenuData(data));
   }, []);
 
-  console.log(menuData)
+  // console.log(menuData)
 
   return (
     <>

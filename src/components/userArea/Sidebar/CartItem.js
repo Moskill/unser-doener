@@ -10,16 +10,18 @@ function CartItem({data, index}) {
 
   }
 
+console.log(data)
+
   return (
     <>
-      {cookies.rawCart && (  
+      {data && (  
         <div className="cart-item-wrapper">
           <button className="cart-item-delete-btn" onClick={removeItemFromCart}>x</button>
         <div className="cart-item-card">
           <img src="http://skeel.de/img/doener2-opt.jpg" />
           <div className="card-info">
             <span className="card-item-title">{data.name}</span>
-            <p className="cart-item-desc"><br/>Der Klassiker mit Kalb- oder Hähnchenfleisch, frischem Salat und verschiedenen Saucen. </p>
+            <p className="cart-item-desc"><br/>{data.description}</p>
           </div>
         </div>
         <div className="cart-item-config">
