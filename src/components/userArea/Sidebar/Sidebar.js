@@ -8,9 +8,11 @@ function Sidebar(props) {
   const [menuList, setMenuList] = useState();
   const [cartList, setCartList] = useState();
   const [sideDishes, setSideDishes] = useState();
+  const [tempCart, setTempCart] = useState([JSON.parse(localStorage.getItem('myCart'))]);
+  const [selectedMenus, setSelectedMenus] = useState([]);
 
   let myCart = JSON.parse(localStorage.getItem('myCart'));
-  let useEffectCouter = myCart.length;
+
 
   useEffect(() => {
     fetch("http://localhost:8080/sideDishes")
@@ -26,18 +28,20 @@ function Sidebar(props) {
 
   
   useEffect(() => {
-    let selectedMenus = [];
-    myCart && myCart.myCart.forEach((c) => {
-      const foundMenu = menuList && menuList.find((m) => m.id === c);
-      foundMenu && selectedMenus.push(foundMenu);
+    if (selectedMenus.length !== 0) setSelectedMenus([]);
+      tempCart.myCart && tempCart.myCart.forEach((id) => {
+        console.log(tempCart.myCart, 'Im useEffect')
+        const foundMenu = menuList && menuList.find((m) => m.id === id);
+        setSelectedMenus((selectedMenus) => [...selectedMenus, foundMenu]);
     });
-    setCartList(selectedMenus);
-  }, [useEffectCouter])
+  }, [tempCart.myCart])
 
 
   const sidebarCloseHandler = () => { // FUNZT NICHT DER SCHEISS!!!!!
     setSidebarOpen({left: '110%'})
   }
+
+  console.log(selectedMenus)
 
   return (
     <>
@@ -48,7 +52,7 @@ function Sidebar(props) {
         </div>
         <div className="cart-wrapper">
           <form>
-            {myCart.myCart && myCart.myCart.forEach((meal, index) =>  <CartItem data={meal} index={index}/>)}
+            {cartList && cartList.map((meal, index) =>  <CartItem data={meal} index={index}/>)}
             <button className="order-btn" type="submit">Jetzt bestellen!</button>
           </form>
         </div>
