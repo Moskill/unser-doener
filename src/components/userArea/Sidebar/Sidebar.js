@@ -8,27 +8,22 @@ function Sidebar(props) {
   const [sidebarOpen, setSidebarOpen] = useState(props.sidebarOpen);
   const [menuList, setMenuList] = useState();
   const [cartList, setCartList] = useState(myCart);
-  const [sideDishes, setSideDishes] = useState();
+  const [orderLength, setOrderLength] = useState();
 
-
-  useEffect(() => {
-    fetch("http://localhost:8080/sideDishes")
-    .then((response) => response.json())
-    .then((data) => setSideDishes(data));
-  }, []);
-
+  // Eine Order an die DB senden
   const sendOrder = (orderData) => {
     const orderBody = {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: orderData
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(orderData)
     }
 
-    fetch("http://localhost:8080/order")
+    fetch("http://localhost:8080/orders", orderBody)
     .then((response) => response.json())
     .then((data) => console.log(data, 'POST and die order Route'));
   };
 
+  // Den Shopping Cart updaten
   useEffect(() => {
     localStorage.getItem('myCart') && localStorage.setItem('myCart', JSON.stringify(cartList));
   }, [cartList])
@@ -38,24 +33,45 @@ function Sidebar(props) {
     setSidebarOpen({left: '110%'})
   }
 
-  const createInvioceId = () => {
-    fetch("http://localhost:8080/order")
+  // Die Länge der Order Tabelle ermitteln
+  useEffect(() => {
+    fetch("http://localhost:8080/orders")
     .then((response) => response.json())
-    .then((data) => console.lod(data, 'GET an die order Route'));
+    .then((data) => setOrderLength(data.length));
+  }, [])
+
+
+  // Eine unique Invoice Nummer erstellen
+  const createInvoiceId = () => {
+    let dateNow = new Date();
+    let yearNow = dateNow.getFullYear();
+    let placeholder = '000';
+    switch (orderLength) {
+      case orderLength < 10:
+        placeholder = '000';
+        break;
+      case orderLength < 100:
+        placeholder = '00';
+        break;
+      case orderLength < 1000:
+        placeholder = '0';
+        break;
+    }
+    return `${yearNow}-${placeholder}${orderLength + 1}`;
   }
-  console.log((createInvioceId && createInvioceId()))
 
   // Eine Bestellung an die Darenbank senden
   const orderHandler = (e) => {
+    let invoiceNo = createInvoiceId();
     e.preventDefault();
     const orderData = {
-      menus: e.sonstwas,
-      sideDishes: e.sonstwas,
-      total: e.sonstwas,
-      invoiceId: e.sonstwas
+      menus: `${e.target[1].value}-beef`,
+      sideDishes: `${e.target[3].value},${e.target[4].value},${e.target[5].value},${e.target[6].value},${e.target[7].value},${e.target[8].value}`,
+      total: 6.50,
+      invoiceId: invoiceNo
     }
-    // console.log(e.target[1].value);
-    console.log(e);
+    console.log(orderData)
+    sendOrder(orderData);
   }
 
   return (
