@@ -10,6 +10,9 @@ function Navbar() {
 
   const [showGoogleMenu, setShowGoogleMenu] = useState(false);
 
+  const loginMenuHandler = () => {
+    showGoogleMenu === true ? setShowGoogleMenu(false) : setShowGoogleMenu(true)
+  }
 
   return (
     <>
@@ -24,7 +27,7 @@ function Navbar() {
           </ul>
         </nav>
       
-        <div className="google-login" onClick={() => setShowGoogleMenu(true)}>
+        <div className="google-login" onClick={() => loginMenuHandler()}>
           <Login/>
         </div>
       </div>

@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './Sidebar.css';
 import CartItem from './CartItem';
+let myCart = JSON.parse(localStorage.getItem('myCart'));
 
 function Sidebar(props) {
 
   const [sidebarOpen, setSidebarOpen] = useState(props.sidebarOpen);
   const [menuList, setMenuList] = useState();
-  const [cartList, setCartList] = useState();
+  const [cartList, setCartList] = useState(myCart);
   const [sideDishes, setSideDishes] = useState();
-  const [tempCart, setTempCart] = useState([JSON.parse(localStorage.getItem('myCart'))]);
-  const [selectedMenus, setSelectedMenus] = useState([]);
-
-  let myCart = JSON.parse(localStorage.getItem('myCart'));
 
 
   useEffect(() => {
@@ -20,28 +17,46 @@ function Sidebar(props) {
     .then((data) => setSideDishes(data));
   }, []);
 
-  useEffect(() => {
-    fetch("http://localhost:8080/menu")
-    .then((response) => response.json())
-    .then((data) => setMenuList(data));
-  }, []);
+  const sendOrder = (orderData) => {
+    const orderBody = {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: orderData
+    }
 
-  
+    fetch("http://localhost:8080/order")
+    .then((response) => response.json())
+    .then((data) => console.log(data, 'POST and die order Route'));
+  };
+
   useEffect(() => {
-    if (selectedMenus.length !== 0) setSelectedMenus([]);
-      tempCart.myCart && tempCart.myCart.forEach((id) => {
-        console.log(tempCart.myCart, 'Im useEffect')
-        const foundMenu = menuList && menuList.find((m) => m.id === id);
-        setSelectedMenus((selectedMenus) => [...selectedMenus, foundMenu]);
-    });
-  }, [tempCart.myCart])
+    localStorage.getItem('myCart') && localStorage.setItem('myCart', JSON.stringify(cartList));
+  }, [cartList])
 
 
   const sidebarCloseHandler = () => { // FUNZT NICHT DER SCHEISS!!!!!
     setSidebarOpen({left: '110%'})
   }
 
-  console.log(selectedMenus)
+  const createInvioceId = () => {
+    fetch("http://localhost:8080/order")
+    .then((response) => response.json())
+    .then((data) => console.lod(data, 'GET an die order Route'));
+  }
+  console.log((createInvioceId && createInvioceId()))
+
+  // Eine Bestellung an die Darenbank senden
+  const orderHandler = (e) => {
+    e.preventDefault();
+    const orderData = {
+      menus: e.sonstwas,
+      sideDishes: e.sonstwas,
+      total: e.sonstwas,
+      invoiceId: e.sonstwas
+    }
+    // console.log(e.target[1].value);
+    console.log(e);
+  }
 
   return (
     <>
@@ -51,8 +66,8 @@ function Sidebar(props) {
           {/* <AiOutlineCloseCircle className="close-icon" onClick={sidebarCloseHandler}/> */}
         </div>
         <div className="cart-wrapper">
-          <form>
-            {cartList && cartList.map((meal, index) =>  <CartItem data={meal} index={index}/>)}
+          <form onSubmit={orderHandler}>
+            {myCart && cartList.myCart.map((meal, index) =>  <CartItem data={meal} index={index}/>)}
             <button className="order-btn" type="submit">Jetzt bestellen!</button>
           </form>
         </div>

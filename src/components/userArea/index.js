@@ -25,12 +25,6 @@ function UserAreaIndex() {
     sidebarOpen.left === 80 + '%' ? setSidebarOpen({left: 110 + '%'}) : setSidebarOpen({left: 80 + '%'})
   }
 
-
-  // Der Handler um den Cookie upzudaten
-  const addToCookie = () => {
-    // setCookie('cart', {...cookies.myCookie, meal3})
-  }
-
   return (
     <>
       <Switch>
