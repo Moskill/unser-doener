@@ -13,7 +13,7 @@ import './index.css';
 function UserAreaIndex() {
 
   const [cookies, setCookie, removeCookie] = useCookies(['cart']);
-  const [sidebarOpen, setSidebarOpen] = useState({left: 110 + '%'});
+  const [sidebarOpen, setSidebarOpen] = useState({left: 80 + '%'});
 
   // Wird ausgeführt, sobald ein Item in den Warenkorb gelegt wird
   useEffect(() => {
