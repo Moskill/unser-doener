@@ -27,7 +27,10 @@ function Login() {
   return (
     <>
     <div >
-      <img src={response ? response.imageUrl : profileImage} style={{padding: '5px 10px', backgroundSize: '50px'}} className="google-login-btn"></img>
+      <img src={response ? response.imageUrl : profileImage} 
+           style={{padding: '5px 10px', backgroundSize: '50px'}} 
+           className="google-login-btn">
+      </img>
     </div>
       {/* <GoogleLogin 
         clientId={clientId}

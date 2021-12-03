@@ -1,32 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './CartItem.css';
-import { useCookies } from 'react-cookie';
 
 function CartItem({data, index}) {
-  const [cookies, setCookie, removeCookie] = useCookies(['rawCart']);
+  const [deleteItem, setDeleteItem] = useState();
 
+  useEffect(() => {
+    setDeleteItem(JSON.parse( localStorage.getItem('myCart')))
+  }, [])
+  
+  let tmpCart = deleteItem;
+  
   const removeItemFromCart = (e) => {
     e.preventDefault();
-
+    tmpCart.myCart.splice(e.target.value, 1);
+    setDeleteItem(tmpCart);
+    localStorage.setItem('myCart', JSON.stringify(deleteItem));
+    window.location.reload();
   }
 
-console.log(data)
 
   return (
     <>
       {data && (  
         <div className="cart-item-wrapper">
-          <button className="cart-item-delete-btn" onClick={removeItemFromCart}>x</button>
+          <button className="cart-item-delete-btn" value={index} onClick={removeItemFromCart}>x</button>
         <div className="cart-item-card">
           <img src="http://skeel.de/img/doener2-opt.jpg" />
           <div className="card-info">
-            <span className="card-item-title">{data.name}</span>
+            <input type="hidden" id={`orderIndex-${index}`} />
+            <span className="card-item-title" id={data.name}>{data.name}</span>
+            <input type="hidden" value={data.id} />
             <p className="cart-item-desc"><br/>{data.description}</p>
           </div>
         </div>
         <div className="cart-item-config">
           <div className="cart-item-meat-select"><b>Fleisch: </b>
-            <select>
+            <select required>
               <option selected disabled hidden>Bitte wählen</option>
               <option>Kalb</option>
               <option>Geflügel</option>
@@ -48,3 +57,5 @@ console.log(data)
 }
 
 export default CartItem
+
+
