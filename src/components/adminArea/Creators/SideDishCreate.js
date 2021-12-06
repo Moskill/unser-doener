@@ -1,7 +1,7 @@
 import React from 'react';
 import { Create, SimpleForm, TextInput } from 'react-admin';
 
-function MenuCreate(props) {
+function SideCreate(props) {
   return (
     <Create title="Create an side dish" {...props}>
       <SimpleForm>
@@ -13,4 +13,4 @@ function MenuCreate(props) {
   )
 }
 
-export default MenuCreate
+export default SideCreate

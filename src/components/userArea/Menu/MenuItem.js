@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Menu.css';
-import doener2 from '../../../img/doener2.jpg';
+import { IoFastFoodSharp } from "react-icons/io5";
+import doener3 from '../../../img/doener3.jpg';
 
 function MenuItem({data}) {
   
@@ -27,11 +28,15 @@ function MenuItem({data}) {
       
       <div className="menu-item__container" onClick={() => addMenu(menu)}>
         <div className="menu-item__wrapper">
+          <div className="food-icon" >
+            <IoFastFoodSharp />
+          </div>
+          <img src={doener3} className="menu-item__image">
+          </img>
           <div className="menu-item__title">{menu.name}</div>
-          <img src={doener2} className="menu-item__image"></img>
-          <div className="menu-item__descriion">{menu.description}</div>
+          {/* <div className="menu-item__descriion">{menu.description}</div> */}
           <div className="menu-item__price">{'€ ' + menu.price}</div>
-          <button className="menu-item__add" >Add to Cart</button>
+          {/* <button className="menu-item__add" >Add to Cart</button> */}
         </div>
       </div>
       ))}

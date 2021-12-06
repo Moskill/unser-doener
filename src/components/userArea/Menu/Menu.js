@@ -3,17 +3,8 @@ import './Menu.css';
 import MenuItem from './MenuItem';
 
 
-function Menu() {
+function Menu({menuData}) {
 
-  const [menuData, setMenuData] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:8080/menu")
-      .then((response) => response.json())
-      .then((data) => setMenuData(data));
-  }, []);
-
-  // console.log(menuData)
 
   return (
     <>

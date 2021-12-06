@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar/Navbar';
 import Sidebar from './Sidebar/Sidebar';
 import Menu from './Menu/Menu';
+import Footer from './Footer/Footer';
 import { useCookies } from 'react-cookie';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Switch, Route} from 'react-router-dom';
@@ -12,6 +13,13 @@ import './index.css';
 
 function UserAreaIndex() {
 
+  useEffect(() => {
+    fetch("http://localhost:8080/menu")
+      .then((response) => response.json())
+      .then((data) => setMenuData(data));
+  }, []);
+
+  const [menuData, setMenuData] = useState([]);
   const [cookies, setCookie, removeCookie] = useCookies(['cart']);
   const [sidebarOpen, setSidebarOpen] = useState({left: 80 + '%'});
 
@@ -41,14 +49,15 @@ function UserAreaIndex() {
               <GiHamburgerMenu className="burger-menu-icon" onClick={sidebarOpenHandler}/>
           </div>
           <Sidebar sidebarOpen={sidebarOpen} />
-          <Menu/>
+          {sidebarOpen.left ===  '80%' && <div className="grey-overlay" onClick={sidebarOpenHandler}></div>}
+          <Menu menuData={menuData}/>
         </Route>
 
         <Route exact path="/AdminArea" component={AdminArea}>
           <AdminArea/>
         </Route>
       </Switch>
-
+      <Footer />
       {/* <button onClick={cookieHandler}>Set Cookie</button>
       <button onClick={() => {removeCookie('cart', {path: '/'}); console.log('FOTZE')} }>Cookie löschen</button>
       <button onClick={addToCookie}>Add Meal to Cookie</button> */}
