@@ -25,6 +25,7 @@ function CartItem({data, index}) {
     .then((data) => setSideDishes(data));
   }, []);
 
+
   return (
     <>
       {data && (  
@@ -49,13 +50,13 @@ function CartItem({data, index}) {
           </div>  
           {sideDishes && (
             <>
-            <input type="checkbox" value={sideDishes[3].name} /><span>{sideDishes[3].name}</span><br/>
-            <input type="checkbox" value={sideDishes[2].name} /><span>{sideDishes[2].name}</span><br/>
-            <input type="checkbox" value={sideDishes[0].name} /><span>{sideDishes[0].name}</span><br/>
-            <p className="item-dressing">Soßen</p>
-            <input type="checkbox" value={sideDishes[4].name} /><span>{sideDishes[4].name}</span><br/>
-            <input type="checkbox" value={sideDishes[5].name} /><span>{sideDishes[5].name}</span><br/>
-            <input type="checkbox" value={sideDishes[6].name} /><span>{sideDishes[6].name}</span><br/>
+              <input type="checkbox" value={sideDishes[3].name} /><span>{sideDishes[3].name}</span><br/>
+              <input type="checkbox" value={sideDishes[2].name} /><span>{sideDishes[2].name}</span><br/>
+              <input type="checkbox" value={sideDishes[0].name} /><span>{sideDishes[0].name}</span><br/>
+              <p className="item-dressing">Soßen</p>
+              <input type="checkbox" value={sideDishes[4].name} /><span>{sideDishes[4].name}</span><br/>
+              <input type="checkbox" value={sideDishes[5].name} /><span>{sideDishes[5].name}</span><br/>
+              <input type="checkbox" value={sideDishes[6].name} /><span>{sideDishes[6].name}</span><br/>
             </>
           )}  
           </div>
