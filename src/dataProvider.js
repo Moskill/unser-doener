@@ -68,13 +68,33 @@ const dataProvider = {
         }).then(({ json }) => ({ data: json }));
     },
 
-    create: (resource, params) =>
+    create: (resource, params) => {
         httpClient(`${apiUrl}/${resource}`, {
-            method: 'POST',
-            body: JSON.stringify(params.data),
-        }).then(({ json }) => ({
+          method: 'POST',
+          body: JSON.stringify(params.data),
+        })
+          .then(({ json }) => ({
             data: { ...params.data, id: json.id },
-        })), // Hier muss es dann irgendwie weiter genen mit dem  Request
+          }))
+          // upload file to server
+          .then(({ data }) => {
+            const formData = new FormData()
+            formData.append('imageUpload', data.imageUpload.rawFile)
+            return httpClient(`${apiUrl}/upload`, {
+              method: 'POST',
+              body: formData,
+            })
+          })
+          .then(({ json }) => ({ data: json }))
+      },
+
+    // create: (resource, params) =>
+    //     httpClient(`${apiUrl}/${resource}`, {
+    //         method: 'POST',
+    //         body: JSON.stringify(params.data),
+    //     }).then(({ json }) => ({
+    //         data: { ...params.data, id: json.id },
+    //     })), // Hier muss es dann irgendwie weiter genen mit dem  Request
 
     delete: (resource, params) =>
         httpClient(`${apiUrl}/${resource}/${params.id}`, {

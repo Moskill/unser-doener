@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './Menu.css';
 import { IoFastFoodSharp } from "react-icons/io5";
 import doener3 from '../../../img/doener3.jpg';
+const DIR = 'http://localhost:8080/upload/';
 
 function MenuItem({data}) {
   
@@ -31,7 +32,7 @@ function MenuItem({data}) {
           <div className="food-icon" >
             <IoFastFoodSharp />
           </div>
-          <img src={doener3} className="menu-item__image">
+          <img src={DIR + menu.imgUrl} className="menu-item__image">
           </img>
           <div className="menu-item__title">{menu.name}</div>
           {/* <div className="menu-item__descriion">{menu.description}</div> */}

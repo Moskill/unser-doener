@@ -6,7 +6,8 @@ function CartItem({data, index}) {
   const [deleteItem, setDeleteItem] = useState();
   const [sideDishes, setSideDishes] = useState();
   const [selectedSideDishes, setSelectedSideDishes] = useState({[index]: standardSideDishes});
-
+  const [menuMeat, setMenuMeat] = useState();
+  
 
   // Zu löschende Items in den State schmeißen
   useEffect(() => {
@@ -38,6 +39,23 @@ function CartItem({data, index}) {
     tempArr.splice(tempArr.indexOf(sideDish), 1) : 
     tempArr.push(sideDish); 
     setSelectedSideDishes({[index]: tempArr});
+  };
+
+  // Hier das Menu mit dem ausgewählten Fleisch speichern
+  const menuMeatHandler = (meatChoice, id) => {
+    let meat = '';
+    switch(meatChoice) {
+      case 1:
+        meat = 'beef';
+        break;
+      case 2:
+        meat = 'poultry';
+        break;
+      case 3:
+        meat = 'veggy';
+        break;
+    }
+    setMenuMeat(`${meat}`)
   }
 
   // console.log(selectedSideDishes && selectedSideDishes[index])
@@ -50,14 +68,13 @@ function CartItem({data, index}) {
         <div className="cart-item-card">
           <img src="http://skeel.de/img/doener2-opt.jpg" />
           <div className="card-info">
-            <span className="card-item-title" id={data.name}>{data.name}</span>
-            <input type="hidden" value={data.id} />
+            <span className="card-item-title" >{data.name}</span>
             <p className="cart-item-desc"><br/>{data.description}</p>
           </div>
         </div>
         <div className="cart-item-config">
           <div className="cart-item-meat-select"><b>Fleisch: </b>
-            <select required>
+            <select required onChange={(e) => menuMeatHandler(e.target.selectedIndex, data.id)}>
               <option selected disabled hidden>Bitte wählen</option>
               <option name="beef">Kalb</option>
               <option name="poultry">Geflügel</option>
@@ -108,9 +125,16 @@ function CartItem({data, index}) {
                 onClick={() => sideDishesSelector(sideDishes[6].name)}>{sideDishes[6].name}
               </span><br/>
 
-              <input type="hidden" value={selectedSideDishes} />
+              <input type="hidden" name="menu" value={`${data.id}-${menuMeat}`} />
+              <input type="hidden" name="sideDishes" value={JSON.stringify(selectedSideDishes)} />
+
+              {/* <input type="hidden" id={`${index}-`} value={`${data.id}/${menuMeat}-${JSON.stringify(selectedSideDishes)}`} /> */}
             </>
           )}  
+          </div>
+          <div className="menu-price" id={data.price}>
+            <span className="menu-price">Preis: {data.price}</span>
+            <input type="hidden" name="price" value={data.price}/>
           </div>
         </div>
       )}

@@ -15,6 +15,12 @@ function Sidebar(props) {
   const [orderLength, setOrderLength] = useState();
   const [orderPage, setOrderPage] = useState(1);
   const [userAddress, setUserAddress] = useState();
+  const [total, setTotal] = useState();
+
+  useEffect(() => {
+    orderPageHandler();
+    console.log('LECKOMIO')
+  }, [orderPage])
 
   // Eine Order an die DB senden
   const sendOrder = (orderData) => {
@@ -68,23 +74,48 @@ function Sidebar(props) {
 
   // Eine Bestellung an die Darenbank senden
   const orderHandler = (e) => {
-    setOrderPage(2);
-    console.log(e)
-    let invoiceNo = createInvoiceId();
     e.preventDefault();
-    const orderData = {
-      menus: `${e.target[1].value}-${e.target[2].options.selectedIndex}`,
-      sideDishes: `${e.target[3].value},${e.target[4].value},${e.target[5].value},${e.target[6].value},${e.target[7].value},${e.target[8].value}`,
-      total: 6.50,
-      invoiceId: invoiceNo
+    setOrderPage(2);
+
+    let orderLength = e.target.length -1;
+    let invoiceNo = createInvoiceId();
+    let orderMenus = [];
+    let orderTotal = 0;
+    let orderData = {};
+
+
+    if(e.target.price[0]) {
+      console.log('Objekt')
+      e.target.price.forEach(price => orderTotal += parseInt(price.value))
+      for(let i = 0; i < e.target.price.length; i++) {
+        orderData = {
+          menus: e.target.menu[i].value,
+          sideDishes: e.target.sideDishes[i].value,
+          total: e.target.price[i].value,
+          invoiceId: invoiceNo
+        }
+        sendOrder(orderData);
+      }  
+    } else {
+      console.log('Kein Objekt')
+      orderData = {
+        menus: e.target.menu.value,
+        sideDishes: e.target.sideDishes.value,
+        total: e.target.price.value,
+        invoiceId: invoiceNo
+      }
+      sendOrder(orderData);
     }
-    console.log(orderData)
-    // sendOrder(orderData);
+  
+    setTotal(e.target.price.value);
+
   }
 
-  // Handler speicherzt die Adresse zwischen
+  // Handler speichert die Adresse zwischen
   const addressHandler = (e) => {
     e.preventDefault();
+      console.log('HALLLLOOOO????????????????????????')
+      setOrderPage(3)
     setUserAddress([{
       "first_name": e.target[0].value,
       "last_name": e.target[1].value,
@@ -95,6 +126,16 @@ function Sidebar(props) {
       "phone": e.target[6].value,
       "email": e.target[7].value
     }]);
+    const userBody = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(userAddress[0])
+    }
+    fetch("http://localhost:8080/users", userBody)
+    .then((response) => response.json())
+    .then((data) => console.log(data, 'POST and die users Route'));
+
+  console.log(userAddress[0])
   }
 
   // Die Anagabe der Zahlungsmthode
@@ -102,8 +143,6 @@ function Sidebar(props) {
     e.preventDefault();
     console.log(e);
   }
-
-  console.log(userAddress && userAddress)
 
   // Dieser Handler regelt die Sidebar
   const orderPageHandler = () => {
@@ -122,7 +161,7 @@ function Sidebar(props) {
         return(
           <div className="address-form">
             <h4>Bitte geben Sie Ihre Lieferadresse ein</h4>
-            <form onSubmit={addressHandler}>
+            <form onSubmit={ addressHandler}>
               <label for="first_name">Vorname</label> <br/>
               <input className="address-input" type="text" placeholder="Vorname" name="first_Name" value={userAddress && userAddress[0].first_name}/><br/>
               
@@ -130,7 +169,7 @@ function Sidebar(props) {
               <input className="address-input" type="text" placeholder="Nachname" name="last_Name" value={userAddress && userAddress[0].last_name} /><br/>
               
               <label for="street_name">Straße</label> <br/>
-              <input className="address-input" type="text" placeholder="Straße" name="street" value={userAddress && userAddress[0].street_name} /><br/>
+              <input className="address-input" type="text" placeholder="Straße" name="street" value={userAddress && userAddress[0].street} /><br/>
               
               <label for="house_no">Hausnummer</label> <br/>
               <input className="address-input" type="text" placeholder="Hausnummer" name="house_no" value={userAddress && userAddress[0].house_no} /><br/>
@@ -149,7 +188,7 @@ function Sidebar(props) {
 
               <button className="order-btn" onClick={() => setOrderPage(1)}>Zurück</button>
               
-              <button className="order-btn" type="submit" onClick={() => setOrderPage(3)} >Weiter</button>
+              <button className="order-btn" type="submit" >Weiter</button>
             </form>
           </div>
         )
@@ -162,22 +201,22 @@ function Sidebar(props) {
             <div className="payment-method">
               <img src={paypal} />
               Paypal
-              <input type="radio" className="payment-radio" />
+              <input type="radio" name="payment" className="payment-radio" />
             </div>
             <div className="payment-method">
               <img src={applepay} />
               Apple Pay
-              <input type="radio" className="payment-radio" />
+              <input type="radio" name="payment" className="payment-radio" />
             </div>
             <div className="payment-method">
               <img src={klarna} />
               Klarna
-              <input type="radio" className="payment-radio" />
+              <input type="radio" name="payment" className="payment-radio" />
             </div>
             <div className="payment-method">
               <img src={cashpay} />
               Barzahlung
-              <input type="radio" className="payment-radio" />
+              <input type="radio" name="payment" className="payment-radio" />
             </div>
             
             <button className="order-btn" onClick={() => setOrderPage(2)}>Zurück</button>
