@@ -33,7 +33,7 @@
 
 .sidebar-header {
   height: 2.5em;
-  width: 100%;
+  width: 20%;
   background-color: #f13c20;
   display: block;
   border-bottom: 1px solid rgb(71, 50, 26);
@@ -88,4 +88,16 @@
 
 .payment-radio {
   margin-right: 2rem;
+}
+
+.goodbye-text {
+  padding-top: 4rem;
+  padding-left: 1rem;
+}
+
+.side-dishes {
+  cursor: pointer;
+  font-weight: 400;
+  padding: 0px 5px;
+  color: white;
 }
