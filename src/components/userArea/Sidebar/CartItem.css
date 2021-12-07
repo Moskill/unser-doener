@@ -91,3 +91,15 @@ h4 {
 .address-form {
   font-weight: 700;
 }
+
+.menu-price {
+  text-align:end;
+  margin-left: auto;
+  margin-right: 0.7rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  background-color: #4056a1;
+  border-radius: 5px;
+  max-width: 100px;
+  color: white;
+}
