@@ -68,6 +68,8 @@ function Sidebar(props) {
 
   // Eine Bestellung an die Darenbank senden
   const orderHandler = (e) => {
+    setOrderPage(2);
+    console.log(e)
     let invoiceNo = createInvoiceId();
     e.preventDefault();
     const orderData = {
@@ -111,7 +113,7 @@ function Sidebar(props) {
         <div className="cart-wrapper">
           <form onSubmit={orderHandler}>
             {myCart && cartList.myCart.map((meal, index) =>  <CartItem data={meal} index={index}/>)}
-            <button className="order-btn" type="submit" onClick={() => setOrderPage(2)}>Weiter</button>
+            <button className="order-btn" type="submit">Weiter</button>
           </form>
         </div>
         )
@@ -180,16 +182,18 @@ function Sidebar(props) {
             
             <button className="order-btn" onClick={() => setOrderPage(2)}>Zurück</button>
             
-            <button className="order-btn" type="submit" onClick={() => setOrderPage(3)} >Weiter</button>
+            <button className="order-btn" type="submit" onClick={() => setOrderPage(4)} >Weiter</button>
           </form>
         </div>
         )
         break;
       case 4: 
-      return(
-        <h3>Hier ist Case 4</h3>
-      )
-      break;
+        return(
+          <div className="goodbye-text">
+            <h4>Vielen Dank für Ihr Bestellung. Sie können den Status Ihrer Bestllung hier verfolgen.</h4>
+          </div>
+        )
+        break;
     }
   }
 

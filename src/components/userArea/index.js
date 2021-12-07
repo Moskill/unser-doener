@@ -58,9 +58,6 @@ function UserAreaIndex() {
         </Route>
       </Switch>
       <Footer />
-      {/* <button onClick={cookieHandler}>Set Cookie</button>
-      <button onClick={() => {removeCookie('cart', {path: '/'}); console.log('FOTZE')} }>Cookie löschen</button>
-      <button onClick={addToCookie}>Add Meal to Cookie</button> */}
     </>
   )
 }
