@@ -8,4 +8,41 @@
   border-top: 1px solid #b2b2b2;
   box-shadow: -1px 2px 7px #000;
   color: white;
+  display:flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 14px;
+  
+}
+
+.footer-wrapper-left, 
+.footer-wrapper-center,
+.footer-wrapper-right  p{
+
+}
+
+.footer-wrapper-left {
+  margin: 8px 0px;
+}
+
+.footer-wrapper-center,
+.footer-wrapper-right,
+.footer-wrapper-left p {
+  margin :0px;
+  padding: 0px;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.footer-wrapper-left p:hover {
+  cursor: pointer;
+  color: #f13c20;
+} 
+
+.footer-wrapper-center {
+
+}
+
+.footer-wrapper-right {
+
 }

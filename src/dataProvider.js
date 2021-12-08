@@ -86,9 +86,21 @@ const dataProvider = {
           method: 'POST',
           body: formData,
         })
-      })
-      .then(({ json }) => ({ data: json }))
-  },
+          .then(({ json }) => ({
+            data: { ...params.data, id: json.id },
+          }))
+          // upload file to server
+          .then(({ data }) => {
+              if(!data.imageUpload) {return}
+            const formData = new FormData()
+            formData.append('imageUpload', data.imageUpload.rawFile)
+            return httpClient(`${apiUrl}/upload`, {
+              method: 'POST',
+              body: formData,
+            })
+          })
+          //.then(({ json }) => ({ data: json }))
+      })},
 
   // create: (resource, params) =>
   //     httpClient(`${apiUrl}/${resource}`, {

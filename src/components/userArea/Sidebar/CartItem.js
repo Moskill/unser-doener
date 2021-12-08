@@ -7,6 +7,7 @@ function CartItem({data, index}) {
   const [sideDishes, setSideDishes] = useState();
   const [selectedSideDishes, setSelectedSideDishes] = useState({[index]: standardSideDishes});
   const [menuMeat, setMenuMeat] = useState();
+  const DIR = 'http://localhost:8080/upload/';
   
 
   // Zu löschende Items in den State schmeißen
@@ -66,7 +67,7 @@ function CartItem({data, index}) {
         <div className="cart-item-wrapper">
           <button className="cart-item-delete-btn" value={index} onClick={removeItemFromCart}>x</button>
         <div className="cart-item-card">
-          <img src="http://skeel.de/img/doener2-opt.jpg" />
+          <img src={DIR + data.imgUrl} />
           <div className="card-info">
             <span className="card-item-title" >{data.name}</span>
             <p className="cart-item-desc"><br/>{data.description}</p>

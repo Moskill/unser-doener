@@ -54,3 +54,14 @@
 .google-login {
   margin-right: 5rem;
 }
+
+.logo-wrapper {
+  margin-top: -2px;
+  margin-left: 10%;
+  border-right: 1px solid white;
+  padding-right: 3rem;
+}
+
+.logo-img {
+  margin-bottom: -9px;
+}

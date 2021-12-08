@@ -1,10 +1,18 @@
 import React from 'react';
+import FooterLeft from './FooterLeft';
+import FooterCenter from './FooterCenter';
+import FooterRight from './FooterRight';
 import './Footer.css';
 
-export default function Footer() {
+
+function Footer() {
   return (
     <div className="footer-wrapper">
-      <h1>This is the footer</h1>
+      <FooterLeft />
+      <FooterCenter />
+      <FooterRight />
     </div>
   )
 }
+
+export default Footer
