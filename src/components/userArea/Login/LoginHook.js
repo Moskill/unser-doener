@@ -2,10 +2,14 @@ import React, { useContext } from 'react'
 import { useGoogleLogin } from 'react-google-login'
 import { AuthContext } from '../context/AuthContext'
 import { refreshTokenSetup } from './refreshToken'
+import { FcGoogle } from "react-icons/fc";
+import './Login.css';
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID
 
 function LoginHook() {
+
   const { setGoogleUserData } = useContext(AuthContext)
+
   const onSuccess = (res) => {
     console.log('[Login Success] currentUser: ', res.profileObj)
     setGoogleUserData(res)
@@ -27,8 +31,8 @@ function LoginHook() {
   return (
     <>
       <button onClick={signIn} className='login-btn'>
-        <img src='icons/google.svg'></img>
-        <span className='button-text'>Sign in with Google</span>
+        <FcGoogle className="google-icon" />
+        <span className='button-text'>Google sign in</span>
       </button>
     </>
   )

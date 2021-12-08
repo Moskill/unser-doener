@@ -3,11 +3,22 @@ p {
 }
 
 .login-menu-wrapper {
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
   display: flex;
   justify-content: center;
   flex-direction: column;
   float: right;
   z-index: 999;
   position: relative;
+  left: 1%;
+  width: 15rem;
+}
+
+.login-menu-header {
+  background-color: rgb(239, 239, 239);
+  font-weight: 700;
+  padding: 3px 10px;
+  margin-top: 7px;
+  border: 1px solid grey;
+  border-bottom: none;
 }

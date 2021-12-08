@@ -7,9 +7,9 @@ function Menu({menuData}) {
 
 
   return (
-    <>
+    <div className="menu-inner-container">
       <MenuItem data={menuData} key={menuData.id} />
-    </>
+    </div>
   )
 }
 

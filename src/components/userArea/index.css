@@ -6,9 +6,10 @@ body {
 .menu-wrapper {
   display: flex;
   justify-content: center;
-  margin-left: 20%;
-  margin-right: 20%;
   flex-wrap: wrap;
+  flex-direction: row;
+  width: 1280px;
+  margin: auto;
 }
 
 .sidebar-open {

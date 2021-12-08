@@ -9,7 +9,7 @@ import { AuthContext } from '../context/AuthContext'
 let myCart = JSON.parse(localStorage.getItem('myCart'))
 
 function Sidebar(props) {
-  const { googleUserData } = useContext(AuthContext)
+  const { googleUserData } = useContext(AuthContext);
 
   const [sidebarOpen, setSidebarOpen] = useState(props.sidebarOpen);
   const [cartList, setCartList] = useState(myCart);
@@ -17,6 +17,8 @@ function Sidebar(props) {
   const [orderPage, setOrderPage] = useState(1);
   const [userAddress, setUserAddress] = useState();
   const [total, setTotal] = useState();
+
+  console.log('CONTEXT TEST IN SIDEBAR', googleUserData)
 
   useEffect(() => {
     orderPageHandler();
@@ -105,6 +107,9 @@ function Sidebar(props) {
     setTotal(e.target.price.value);
   }
 
+  // Spghetti!! eMail nachträglich einfügen
+
+
   // Handler speichert die Adresse zwischen
   const addressHandler = (e) => {
     e.preventDefault();
@@ -134,7 +139,7 @@ function Sidebar(props) {
 
   // Die Anagabe der Zahlungsmthode
   const paymentHandler = () => {
-    setTimeout(window.location.reload(), 1500);
+    setTimeout(window.location.reload(), 2500);
   }
 
   // Dieser Handler regelt die Sidebar

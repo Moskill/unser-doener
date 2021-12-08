@@ -14,7 +14,7 @@
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  height: 4em;
+  height: 4.2em;
 }
 
 .navbar ul {
@@ -64,4 +64,10 @@
 
 .logo-img {
   margin-bottom: -9px;
+}
+
+.google-avatar img {
+  margin-top: 5px;
+  height: 50px;
+  border-radius: 25px;
 }

@@ -3,6 +3,7 @@ import Navbar from './Navbar/Navbar';
 import Sidebar from './Sidebar/Sidebar';
 import Menu from './Menu/Menu';
 import Footer from './Footer/Footer';
+import Order from './Order/Order';
 import { useCookies } from 'react-cookie';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Switch, Route} from 'react-router-dom';
@@ -54,7 +55,7 @@ function UserAreaIndex() {
           </div>
           <Sidebar sidebarOpen={sidebarOpen} />
         </Route>
-        {/* <Route exact path="/menu" component={Menu}>
+        <Route exact path="/order" component={Order}>
         <Navbar />
           <div className="sidebar-open">
               <GiHamburgerMenu className="burger-menu-icon" onClick={sidebarOpenHandler}/>
@@ -62,8 +63,8 @@ function UserAreaIndex() {
           </div>
           <Sidebar sidebarOpen={sidebarOpen} />
   
-
-        </Route> */}
+        <Order />
+        </Route>
 
         <Route exact path="/AdminArea" component={AdminArea}>
           <AdminArea/>
