@@ -34,7 +34,8 @@ function Navbar() {
         </nav>
       
         <div className="google-login" onClick={() => loginMenuHandler()}>
-          {/* <Login/> */}
+          "login"
+          {/* <Login /> */}
         </div>
       </div>
       {/* {showGoogleMenu && <LogMenu />} */}
