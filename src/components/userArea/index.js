@@ -40,15 +40,12 @@ function UserAreaIndex() {
     <>
       <Switch>
         <Route exact path="/">
+
           <Navbar />
-          <h2>This is the main component</h2>
-          <div className="sidebar-open">
-              <GiHamburgerMenu className="burger-menu-icon" onClick={sidebarOpenHandler}/>
-          </div>
-          <Sidebar sidebarOpen={sidebarOpen} />
-        </Route>
-        <Route exact path="/menu" component={Menu}>
-        <Navbar />
+            {sidebarOpen.left ===  '80%' && <div className="grey-overlay" onClick={sidebarOpenHandler}></div>}
+          <div className="menu-wrapper">
+            <Menu menuData={menuData}/>
+            </div>
           <div className="sidebar-open">
               <GiHamburgerMenu className="burger-menu-icon" onClick={sidebarOpenHandler}/>
               {menusInCart && JSON.parse(menusInCart).myCart.length !== 0 && (
@@ -56,9 +53,17 @@ function UserAreaIndex() {
               )}
           </div>
           <Sidebar sidebarOpen={sidebarOpen} />
-          {sidebarOpen.left ===  '80%' && <div className="grey-overlay" onClick={sidebarOpenHandler}></div>}
-          <Menu menuData={menuData}/>
         </Route>
+        {/* <Route exact path="/menu" component={Menu}>
+        <Navbar />
+          <div className="sidebar-open">
+              <GiHamburgerMenu className="burger-menu-icon" onClick={sidebarOpenHandler}/>
+
+          </div>
+          <Sidebar sidebarOpen={sidebarOpen} />
+  
+
+        </Route> */}
 
         <Route exact path="/AdminArea" component={AdminArea}>
           <AdminArea/>

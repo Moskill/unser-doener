@@ -3,7 +3,9 @@ import './Navbar.css';
 import { NavLink } from 'react-router-dom';
 // import Login from '../Login/Login';
 // import LogMenu from './LogMenu';
-import AdminArea from '../../adminArea/index.js'
+import AdminArea from '../../adminArea/index.js';
+import logow from '../../../img/logo1w.png';
+import logo2w from '../../../img/logo2w.png';
 
 
 function Navbar() {
@@ -18,9 +20,12 @@ function Navbar() {
   return (
     <>
       <div id="navigation">
+        <div className="logo-wrapper">
+          <img src={logo2w} height="50" className="logo-img" />
+        </div>
         <nav className="navbar">
           <ul>
-            <NavLink className="navlink" to="/menu"><li>Menü</li></NavLink>
+            {/* <NavLink className="navlink" to="/menu"><li>Menü</li></NavLink> */}
             <NavLink className="navlink" to="/order"><li>Bestellung</li></NavLink>
             <NavLink className="navlink" to="/contact"><li>Kontakt</li></NavLink>
             <NavLink className="navlink" to="/order"><li>About Us</li></NavLink>

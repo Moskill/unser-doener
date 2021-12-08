@@ -4,7 +4,10 @@ import './Footer.css';
 function FooterCenter() {
   return (
     <div className="footer-center-wrapper">
-      <h5>Footer center </h5>
+            <p>Kontakt</p>
+      <p>Über uns</p>
+      <p>Location</p>
+      <p>Impressum</p>
     </div>
   )
 }

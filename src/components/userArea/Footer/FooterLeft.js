@@ -4,10 +4,10 @@ import './Footer.css';
 function FooterLeft() {
   return (
     <div className="footer-wrapper-left">
-      <p>Link 1</p>
-      <p>Link 1</p>
-      <p>Link 1</p>
-      <p>Link 1</p>
+      <p>Kontakt</p>
+      <p>Über uns</p>
+      <p>Location</p>
+      <p>Impressum</p>
     </div>
   )
 }
