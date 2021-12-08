@@ -1,7 +1,7 @@
 import React from 'react';
 import './LogMenu.css';
-import LoginHook from '../Login/LoginHook';
-import LogoutHook from '../Login/LogoutHook';
+import LoginHook from './LoginHook';
+import LogoutHook from './LogoutHook';
 
 function LogMenu() {
 

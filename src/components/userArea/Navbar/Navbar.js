@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import './Navbar.css';
 import { NavLink } from 'react-router-dom';
-import Login from '../Login/Login';
-import LogMenu from './LogMenu';
+// import Login from '../Login/Login';
+// import LogMenu from './LogMenu';
 import AdminArea from '../../adminArea/index.js'
 
 
 function Navbar() {
 
   const [showGoogleMenu, setShowGoogleMenu] = useState(false);
+
 
   const loginMenuHandler = () => {
     showGoogleMenu === true ? setShowGoogleMenu(false) : setShowGoogleMenu(true)
@@ -28,10 +29,10 @@ function Navbar() {
         </nav>
       
         <div className="google-login" onClick={() => loginMenuHandler()}>
-          <Login/>
+          {/* <Login/> */}
         </div>
       </div>
-      {showGoogleMenu && <LogMenu />}
+      {/* {showGoogleMenu && <LogMenu />} */}
     </>
   )
 }

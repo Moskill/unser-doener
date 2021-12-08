@@ -78,6 +78,7 @@ const dataProvider = {
           }))
           // upload file to server
           .then(({ data }) => {
+              if(!data.imageUpload) {return}
             const formData = new FormData()
             formData.append('imageUpload', data.imageUpload.rawFile)
             return httpClient(`${apiUrl}/upload`, {
@@ -85,7 +86,7 @@ const dataProvider = {
               body: formData,
             })
           })
-          .then(({ json }) => ({ data: json }))
+          //.then(({ json }) => ({ data: json }))
       },
 
     // create: (resource, params) =>

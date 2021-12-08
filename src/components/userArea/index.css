@@ -1,13 +1,13 @@
+body {
+  background-color: #efe2ba;
+  overflow: hidden;
+}
+
 .sidebar-open {
   float: right;
   position: absolute;
   left: 97%;
   top: 2%;
-}
-
-body {
-  background-color: #efe2ba;
-  overflow: hidden;
 }
 
 .grey-overlay {
@@ -20,4 +20,20 @@ body {
   margin-top: 8px;
   margin-left: -8px;
   z-index: 2;
+}
+
+.cart-item-info {
+  font-size: 10px;
+  font-weight: 700;
+  color: white;
+  background-color: rgb(255, 187, 0);
+  border-radius: 10px;
+  padding: 2px;
+  width: 14px;
+  text-align: center;
+  text-shadow: rgb(0 0 0) 1px 1px 0px;
+  z-index: 888;
+  margin-top: -18px;
+  margin-left: -0.5rem;
+  border: 1px solid rgb(184, 125, 0);
 }

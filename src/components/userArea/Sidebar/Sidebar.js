@@ -10,7 +10,6 @@ let myCart = JSON.parse(localStorage.getItem('myCart'));
 function Sidebar(props) {
 
   const [sidebarOpen, setSidebarOpen] = useState(props.sidebarOpen);
-  const [menuList, setMenuList] = useState();
   const [cartList, setCartList] = useState(myCart);
   const [orderLength, setOrderLength] = useState();
   const [orderPage, setOrderPage] = useState(1);
@@ -19,7 +18,6 @@ function Sidebar(props) {
 
   useEffect(() => {
     orderPageHandler();
-    console.log('LECKOMIO')
   }, [orderPage])
 
   // Eine Order an die DB senden
@@ -77,15 +75,12 @@ function Sidebar(props) {
     e.preventDefault();
     setOrderPage(2);
 
-    let orderLength = e.target.length -1;
     let invoiceNo = createInvoiceId();
-    let orderMenus = [];
     let orderTotal = 0;
     let orderData = {};
 
 
     if(e.target.price[0]) {
-      console.log('Objekt')
       e.target.price.forEach(price => orderTotal += parseInt(price.value))
       for(let i = 0; i < e.target.price.length; i++) {
         orderData = {
@@ -97,7 +92,6 @@ function Sidebar(props) {
         sendOrder(orderData);
       }  
     } else {
-      console.log('Kein Objekt')
       orderData = {
         menus: e.target.menu.value,
         sideDishes: e.target.sideDishes.value,
@@ -106,17 +100,14 @@ function Sidebar(props) {
       }
       sendOrder(orderData);
     }
-  
     setTotal(e.target.price.value);
-
   }
 
   // Handler speichert die Adresse zwischen
   const addressHandler = (e) => {
     e.preventDefault();
-      console.log('HALLLLOOOO????????????????????????')
-      setOrderPage(3)
-    setUserAddress([{
+    setOrderPage(3)
+    const addressData = {
       "first_name": e.target[0].value,
       "last_name": e.target[1].value,
       "street": e.target[2].value,
@@ -125,23 +116,23 @@ function Sidebar(props) {
       "zip": e.target[5].value,
       "phone": e.target[6].value,
       "email": e.target[7].value
-    }]);
+    };
+    console.log(userAddress)
     const userBody = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(userAddress[0])
+      body: JSON.stringify(addressData)
     }
     fetch("http://localhost:8080/users", userBody)
     .then((response) => response.json())
     .then((data) => console.log(data, 'POST and die users Route'));
-
-  console.log(userAddress[0])
+    localStorage.setItem('myCart', JSON.stringify({myCart:[]}));
+    
   }
 
   // Die Anagabe der Zahlungsmthode
-  const paymentHandler = (e) => {
-    e.preventDefault();
-    console.log(e);
+  const paymentHandler = () => {
+    setTimeout(window.location.reload(), 1500);
   }
 
   // Dieser Handler regelt die Sidebar
@@ -229,7 +220,8 @@ function Sidebar(props) {
       case 4: 
         return(
           <div className="goodbye-text">
-            <h4>Vielen Dank für Ihr Bestellung. Sie können den Status Ihrer Bestllung hier verfolgen.</h4>
+            <h4>Vielen Dank für Ihr Bestellung. </h4>
+            {paymentHandler()}
           </div>
         )
         break;
