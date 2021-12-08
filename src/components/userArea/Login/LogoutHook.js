@@ -1,5 +1,7 @@
 import React from 'react'
-import { useGoogleLogout } from 'react-google-login'
+import { useGoogleLogout } from 'react-google-login';
+import { FcGoogle } from "react-icons/fc";
+import './Login.css';
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID
 
 function LogoutHook() {
@@ -20,7 +22,7 @@ function LogoutHook() {
   return (
     <>
       <button onClick={signOut} className='logout-btn'>
-        <img src='icons/google.svg'></img>
+        <FcGoogle className="google-icon" />
         <span className='logout-btn-text'>Sign out</span>
       </button>
     </>

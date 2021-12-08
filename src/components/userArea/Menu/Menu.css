@@ -63,3 +63,12 @@
   margin-left: 88%;
   color: #f13c20;
 }
+
+.menu-inner-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 1280px;
+  margin: auto;
+}
